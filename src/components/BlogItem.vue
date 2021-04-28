@@ -4,10 +4,10 @@
         <a class="post-img" href="blog-post.html"><img src="http://127.0.0.1/cdn/webmag/post-1.jpg" alt=""></a>
         <div class="post-body">
             <div class="post-meta">
-                <a class="post-category cat-2" style="background-color:" href="#">{{ blog.category.CategoryName }}</a>
+                <router-link class="post-category cat-2" style="background-color:" :to="{ name:'Category', params:{ Cat:blog.category.CategoryName }}" >{{ blog.category.CategoryName }}</router-link>
                 <span class="post-date">March 27, 2018</span>
             </div>
-            <h3 class="post-title"><a href="blog-post.html">{{blog.BlogTitle}} </a></h3>
+            <h3 class="post-title"><router-link to="#" >{{blog.BlogTitle}} </router-link></h3>
             <p>{{ blog.BlogBody }}</p>
         </div>
         </div>

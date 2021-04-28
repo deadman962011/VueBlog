@@ -1,20 +1,19 @@
 <template>
-  <div class="home">
-    <div class="row">
-     <Carousel />
-    </div>
+  <div class="category">
 
     <div class="row">
       <div class="col-sm-9">
-       <RecentBlog />
+        <h2>Category One Blogs </h2>
+        <CategoryBlog />
       </div>
+
       <div class="col-sm-3">
-       <CatList />
+        <CatList />
       </div>
     </div>
 
 
-
+   
 
   </div>
 </template>
@@ -22,14 +21,12 @@
 <script>
 // @ is an alias to /src
 
-import Carousel from '@/components/widgets/Carousel.vue';
-import RecentBlog from '@/components/lists/RecentBlog.vue';
+import CategoryBlog from '@/components/lists/CategoryBlog.vue';
 import CatList from '@/components/widgets/CatList.vue';
 export default {
-  name: 'Home',
+  name: 'Category',
   components:{
-    Carousel,
-    RecentBlog,
+    CategoryBlog,
     CatList
   }
 
