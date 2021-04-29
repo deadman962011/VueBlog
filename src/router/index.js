@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Category from '../views/Category.vue'
+import BlogOne from '../views/BlogOne.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,7 +24,13 @@ const routes = [
     path: '/:Cat',
     name: 'Category',
     component: Category
+  },
+  {
+    path: '/:Cat/:Blog',
+    name: 'BlogOne',
+    component: BlogOne
   }
+
 ]
 
 const router = new VueRouter({

@@ -7,7 +7,7 @@
                 <router-link class="post-category cat-2" style="background-color:" :to="{ name:'Category', params:{ Cat:blog.category.CategoryName }}" >{{ blog.category.CategoryName }}</router-link>
                 <span class="post-date">March 27, 2018</span>
             </div>
-            <h3 class="post-title"><router-link to="#" >{{blog.BlogTitle}} </router-link></h3>
+            <h3 class="post-title"><router-link :to="{ name:'BlogOne', params:{ Cat:blog.category.CategoryName,Blog:blog.id }}" >{{blog.BlogTitle}} </router-link></h3>
             <p>{{ blog.BlogBody }}</p>
         </div>
         </div>
