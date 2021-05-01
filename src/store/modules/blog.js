@@ -17,9 +17,13 @@ const actions = {
 
     async fetchBlogs({ commit }){
 
-        var res =await axios.get('http://127.0.0.1:8000/api/BlaxkBlog/6/BlogAll');
-        console.log('Blog Fetched')
+
+        //get access Token
+        var res =await axios.get('http://127.0.0.1:8000/api/BlaxkBlog/6/BlogAll',);
+        console.log(res)
         commit('BlogAll',res.data)
+       
+
     },
 
     async fetchBlogsByCat({commit},catId){

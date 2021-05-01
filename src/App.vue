@@ -1,9 +1,18 @@
 <template>
   <div id="app">
-    <Navbar />
+
+
+   
+  
+     <Navbar v-if="enabled"  />
+ 
+
+      
+  
+    
 
     <div class="container">
-     <router-view/>
+     <!-- <router-view/> -->
     </div>
 
   </div>
@@ -12,12 +21,43 @@
 <script>
 
 import Navbar from '@/components/layouts/Navbar.vue';
+import {mapActions,mapGetters} from 'vuex';
+
 
 export default {
 
-  components: {
-    Navbar
+
+  props:{
+    test:Boolean
   },
+  methods:{
+    ...mapActions(['getAccess','fetchCategories','fetchBlogs'])
+  },
+  computed:{
+    ...mapGetters(['CategoryAll']),
+
+  },
+  components: {
+     Navbar,
+  },
+  mounted(){
+
+    this.test = false
+    var site={
+        SiteId:6,
+        SiteToken:'e173ed367256db629e2e664f727886f0'
+    };
+
+   if(this.getAccess(site)){
+      this.test = true
+     
+     console.log('get Access Done')
+     console.log(this.test)
+   }
+ 
+  
+  }
+
 
 }
 

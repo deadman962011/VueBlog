@@ -14,7 +14,7 @@
 
 <script>
 
-import {mapGetters,mapActions} from 'vuex';
+import {mapGetters} from 'vuex';
 import BlogItem from '@/components/BlogItem';
 export default {
     name:"RecentBlog",
@@ -26,11 +26,11 @@ export default {
     ...mapGetters(['BlogAll'])
     },
     methods:{
-        ...mapActions(['fetchBlogs'])
+        // ...mapActions(['fetchBlogs'])
     },
-    mounted(){
-            return this.fetchBlogs()
-    }
+    // mounted(){
+    //         return this.fetchBlogs()
+    // }
 }
 </script>
 
