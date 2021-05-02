@@ -1,18 +1,10 @@
 <template>
   <div id="app">
 
-
-   
-  
-     <Navbar v-if="enabled"  />
- 
-
-      
-  
-    
+    <Navbar v-if="authDone"  />
 
     <div class="container">
-     <!-- <router-view/> -->
+     <router-view v-if="authDone"/>
     </div>
 
   </div>
@@ -21,20 +13,23 @@
 <script>
 
 import Navbar from '@/components/layouts/Navbar.vue';
-import {mapActions,mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 
 
 export default {
 
 
   props:{
-    test:Boolean
+    authDone:{
+      type:Boolean,
+      default:false
+    }
   },
   methods:{
     ...mapActions(['getAccess','fetchCategories','fetchBlogs'])
   },
   computed:{
-    ...mapGetters(['CategoryAll']),
+  
 
   },
   components: {
@@ -42,22 +37,30 @@ export default {
   },
   mounted(){
 
-    this.test = false
     var site={
-        SiteId:6,
-        SiteToken:'e173ed367256db629e2e664f727886f0'
+        SiteId:process.env.VUE_APP_SITEID,
+        SiteToken:process.env.VUE_APP_SITETOKEN
     };
 
-   if(this.getAccess(site)){
-      this.test = true
-     
-     console.log('get Access Done')
-     console.log(this.test)
-   }
- 
-  
-  }
+    if(this.getAccess(site)){
 
+
+           console.log('Access Done')
+          setTimeout(() => {
+
+           //get Categories
+           this.fetchCategories()
+
+           //get Blogs 
+           this.fetchBlogs()
+
+           //Cahge Auth 
+           this.authDone = true
+            
+        }, 3000);
+
+    }
+  },
 
 }
 

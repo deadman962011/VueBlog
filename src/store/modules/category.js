@@ -14,7 +14,7 @@ const actions = {
 
     async fetchCategories({ commit }){
         
-       var res= await axios.get('http://127.0.0.1:8000/api/BlaxkBlog/6/CategoryAll');
+       var res= await axios.get(process.env.VUE_APP_BASEURLBLAXK+'BlaxkBlog/'+process.env.VUE_APP_SITEID+'/CategoryAll');
         commit('CategoryAll',res.data)
     }
     

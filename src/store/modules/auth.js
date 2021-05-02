@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 const state={
 
     auth:{}
@@ -17,12 +18,16 @@ const actions={
     async getAccess({ commit },form){        
 
         //Do Request 
-        var res=await axios.post('http://127.0.0.1:8000/api/login',form)
+        var res=await axios.post(process.env.VUE_APP_BASEURLBLAXK+'login',form)
 
         var auth ={
 
             token:res.data
         }
+
+        //Check Response And set acceess Token
+        axios.defaults.headers.common['Authorization'] = auth.token;
+
 
         commit('auth',auth)
 
