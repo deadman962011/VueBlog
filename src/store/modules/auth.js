@@ -26,7 +26,7 @@ const actions={
         }
 
         //Check Response And set acceess Token
-        axios.defaults.headers.common['Authorization'] = auth.token;
+        axios.defaults.headers.common['Authorization'] = 'bearer '+ auth.token;
 
 
         commit('auth',auth)

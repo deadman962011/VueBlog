@@ -20,7 +20,7 @@ const actions = {
 
         //get access Token
         var res =await axios.get(process.env.VUE_APP_BASEURLBLAXK+'BlaxkBlog/'+process.env.VUE_APP_SITEID+'/BlogAll',);
-        console.log(res)
+
         commit('BlogAll',res.data)
        
 
@@ -38,26 +38,33 @@ const actions = {
 
     },
 
-    getBlogOne({commit,state,dispatch},BlogId){
+    getBlogOne({commit,state},BlogId){
 
-        if(state.Blogs.length === 0){
-            dispatch('fetchBlogs').then(function(){
+        if(state.Blogs.length == 0){
+            // dispatch('fetchBlogs').then(function(){
+
+            setTimeout(() => {
 
                 //get State Blogs Array
                 var  blogs= state.Blogs
-    
+
                 //filter Array 
                 var res =  blogs.find(obj => {
                     return obj.id == BlogId
                     })
     
                 commit('BlogOne',res)
+
+            }, 3000);
+
     
-            })
+            // })
         }
         else{
                 //get State Blogs Array
                 var  blogs= state.Blogs
+
+                
 
                 //filter Array 
                 var res =  blogs.find(obj => {

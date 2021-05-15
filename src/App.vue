@@ -1,11 +1,13 @@
 <template>
   <div id="app">
 
+    
+    <Spinner v-if="spinner" />
     <Navbar v-if="authDone"  />
-
     <div class="container">
-     <router-view v-if="authDone"/>
+           <router-view v-if="authDone"/>
     </div>
+
 
   </div>
 </template>
@@ -13,7 +15,8 @@
 <script>
 
 import Navbar from '@/components/layouts/Navbar.vue';
-import {mapActions} from 'vuex';
+import Spinner from '@/components/layouts/Spinner.vue'
+import {mapActions, mapGetters} from 'vuex';
 
 
 export default {
@@ -23,10 +26,15 @@ export default {
     authDone:{
       type:Boolean,
       default:false
+    },
+    spinner:{
+      type:Boolean,
+      default:true
     }
   },
   methods:{
-    ...mapActions(['getAccess','fetchCategories','fetchBlogs'])
+    ...mapActions(['getAccess','fetchCategories','fetchBlogs']),
+    ...mapGetters(['auth'])
   },
   computed:{
   
@@ -34,6 +42,7 @@ export default {
   },
   components: {
      Navbar,
+     Spinner
   },
   mounted(){
 
@@ -46,7 +55,11 @@ export default {
 
 
            console.log('Access Done')
+          
+          
           setTimeout(() => {
+
+            //Check State Have Token
 
            //get Categories
            this.fetchCategories()
@@ -57,7 +70,12 @@ export default {
            //Cahge Auth 
            this.authDone = true
             
-        }, 3000);
+        }, 6000);
+
+        setTimeout(() => {
+           //  Disable Spinner
+           this.spinner = false
+        }, 10000);
 
     }
   },
