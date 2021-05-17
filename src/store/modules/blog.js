@@ -3,7 +3,11 @@ import axios from 'axios'
 const state = { 
     Blogs:[],
     BlogsByCat:[],
-    BlogOne:{}
+    BlogOne:{},
+    Ads:[],
+    Categories:[],
+    Authors:[]
+    
  };
 
 const getters = {
@@ -38,6 +42,9 @@ const actions = {
 
     },
 
+
+
+    
     getBlogOne({commit,state},BlogId){
 
         if(state.Blogs.length == 0){

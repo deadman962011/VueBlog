@@ -3,9 +3,11 @@
 
     
     <Spinner v-if="spinner" />
-    <Navbar v-if="authDone"  />
-    <div class="container">
-           <router-view v-if="authDone"/>
+    <heading v-if="ready" />
+    <Navbar v-if="ready"  />
+    <div class="container-fluid">
+
+           <router-view v-if="!spinner" />
     </div>
 
 
@@ -15,26 +17,27 @@
 <script>
 
 import Navbar from '@/components/layouts/Navbar.vue';
-import Spinner from '@/components/layouts/Spinner.vue'
-import {mapActions, mapGetters} from 'vuex';
+import Spinner from '@/components/layouts/Spinner.vue';
+import heading from './components/layouts/heading.vue';
+import {mapActions,} from 'vuex';
 
 
 export default {
 
 
   props:{
-    authDone:{
-      type:Boolean,
-      default:false
-    },
     spinner:{
       type:Boolean,
       default:true
+    },
+    ready:{
+      type:Boolean,
+      default:false
     }
   },
   methods:{
-    ...mapActions(['getAccess','fetchCategories','fetchBlogs']),
-    ...mapGetters(['auth'])
+    ...mapActions(['fetchAll']),
+    
   },
   computed:{
   
@@ -42,42 +45,32 @@ export default {
   },
   components: {
      Navbar,
-     Spinner
+     Spinner,
+     heading
   },
+
   mounted(){
 
-    var site={
-        SiteId:process.env.VUE_APP_SITEID,
-        SiteToken:process.env.VUE_APP_SITETOKEN
-    };
-
-    if(this.getAccess(site)){
 
 
-           console.log('Access Done')
-          
-          
-          setTimeout(() => {
+    this.fetchAll().then(()=>{
 
-            //Check State Have Token
-
-           //get Categories
-           this.fetchCategories()
-
-           //get Blogs 
-           this.fetchBlogs()
-
-           //Cahge Auth 
-           this.authDone = true
-            
-        }, 6000);
+        
+        setTimeout(() => {
+           //  Disable Spinner
+           this.ready = true
+        }, 5000);
 
         setTimeout(() => {
            //  Disable Spinner
            this.spinner = false
         }, 10000);
 
-    }
+
+    })
+
+
+    
   },
 
 }

@@ -19,7 +19,7 @@ export default {
     },
     watch:{
      "$route.params.Cat"(){
-        return this.fetchBlogsByCat(this.$route.params.Cat)
+        return this.getBlogsByCategory(this.$route.params.Cat)
      }
     },
     components:{
@@ -30,11 +30,11 @@ export default {
    
     },
     methods:{
-         ...mapActions(['fetchBlogsByCat']),
+         ...mapActions(['getBlogsByCategory']),
     },
     mounted(){
 
-      return this.fetchBlogsByCat(this.$route.params.Cat)
+      return this.getBlogsByCategory(this.$route.params.Cat)
     }
 }
 </script>
